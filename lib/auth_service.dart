@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'auth_manager.dart';
+
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -9,6 +11,7 @@ class AuthService {
       final UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       final User? user = userCredential.user;
+      AuthManager().setCurrentUser(user);
       return user!.uid;
     } catch (e) {
       print('Error: $e');
@@ -22,6 +25,7 @@ class AuthService {
       final UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       final User? user = userCredential.user;
+      AuthManager().setCurrentUser(user);
       return user!.uid;
     } catch (e) {
       print('Error: $e');

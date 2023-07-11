@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'dashboard_sidebar.dart';
 import 'main_app_bar.dart';
+import 'my_donations_screen.dart';
 import 'organization_donation_details_screen.dart';
 import 'organization_donation_model.dart';
 
@@ -21,7 +22,7 @@ class _MainDashboardState extends State<MainDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(title: 'Dashboard'),
+      appBar: const MainAppBar(title: 'Donations Dashboard'),
       body: Center(
         child: Row(
           children: [
@@ -66,12 +67,15 @@ class _MainContentState extends State<MainContent> {
           padding: const EdgeInsets.all(12.0),
           child: MakeDonationScreen(),
         );
+      case 'My Donations':
+        return Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: MyDonationsScreen(),
+        );
       case 'Previous Donations':
         return Padding(
           padding: const EdgeInsets.all(12.0),
-          child: PreviousDonationsScreen(
-            donors: testDonors,
-          ),
+          child: PreviousDonationsScreen(),
         );
       case 'Organization Donation Events':
         return Padding(

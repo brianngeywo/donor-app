@@ -23,7 +23,15 @@ class DashboardSidebar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.history, color: Colors.white),
+            leading: const Icon(Icons.history_outlined, color: Colors.white),
+            title: const Text("My Donations",
+                style: TextStyle(color: Colors.white)),
+            onTap: () {
+              onItemSelected('My Donations');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.history_outlined, color: Colors.white),
             title: const Text('Previous Donations',
                 style: TextStyle(color: Colors.white)),
             onTap: () {

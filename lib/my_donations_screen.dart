@@ -1,36 +1,39 @@
-import 'package:donor_app/donations_service.dart';
-import 'package:flutter/material.dart';
+import 'package:donor_app/auth_manager.dart';
+import 'package:intl/intl.dart';
+import 'package:donor_app/constants.dart';
 import 'package:donor_app/donation_model.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'constants.dart';
-
-class PreviousDonationsScreen extends StatelessWidget {
-  final DonationService donationService = DonationService();
+class MyDonationsScreen extends StatelessWidget {
+  final CollectionReference donationsCollection = donorsCollection
+      .doc("lm3jdbzl1Ub7Neq4LuEUeMfy6cY2")
+      .collection('donations');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Previous Donations'),
+        title: Text('Your Donations'),
       ),
-      body: StreamBuilder<List<Donation>>(
-        stream: donationService.getAllDonationsAsStream(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: donationsCollection.snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Donation> allDonations = snapshot.data!;
+            List<DocumentSnapshot> donationDocs = snapshot.data!.docs;
             Map<String, List<Donation>> donationsByDate =
-                groupDonationsByDate(allDonations);
+                groupDonationsByDate(donationDocs);
 
             return ListView.builder(
               itemCount: donationsByDate.length,
               itemBuilder: (context, index) {
                 String date = donationsByDate.keys.elementAt(index);
-                List<Donation> donations = donationsByDate[date]!;
+                List<Donation> donationsForDate = donationsByDate[date]!;
 
                 return ExpansionTile(
                   initiallyExpanded: true,
                   title: Text(formatDateOnly(DateTime.parse(date))),
-                  children: donations.map((donation) {
+                  children: donationsForDate.map((donation) {
                     return ListTile(
                       title: Text('Donation Type: ${donation.item}'),
                       subtitle: Text('Quantity: ${donation.quantity}'),
@@ -51,10 +54,12 @@ class PreviousDonationsScreen extends StatelessWidget {
     );
   }
 
-  Map<String, List<Donation>> groupDonationsByDate(List<Donation> donations) {
+  Map<String, List<Donation>> groupDonationsByDate(
+      List<DocumentSnapshot> donationDocs) {
     Map<String, List<Donation>> donationsByDate = {};
 
-    for (Donation donation in donations) {
+    for (DocumentSnapshot doc in donationDocs) {
+      Donation donation = Donation.fromMap(doc.data() as Map<String, dynamic>);
       String date = formatDate(donation.dateTime);
 
       if (donationsByDate.containsKey(date)) {
@@ -65,15 +70,5 @@ class PreviousDonationsScreen extends StatelessWidget {
     }
 
     return donationsByDate;
-  }
-
-  String formatDate(DateTime dateTime) {
-    // Implement your own date formatting logic here
-    return dateTime.toString();
-  }
-
-  String formatDateAndTime(DateTime dateTime) {
-    // Implement your own date and time formatting logic here
-    return dateTime.toString();
   }
 }

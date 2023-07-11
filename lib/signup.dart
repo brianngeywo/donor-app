@@ -75,20 +75,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (AuthManager().currentUser != null) {
                         String userId = AuthManager().currentUser!.uid;
                         print("user id: " + userId);
-                        Donor newDonr = Donor(
+                        Donor newDoner = Donor(
                           id: userId,
                           email: email,
                           password: password,
-                          name: "",
-                          phone: '',
+                          name: AuthManager().currentUser!.displayName ?? '',
+                          phone: AuthManager().currentUser!.phoneNumber ?? '',
                           address: '',
                           donations: [],
                         );
                         // Save user details to Firestore database
-                        donorsCollection.doc(userId).set(newDonr.toMap());
+                        donorsCollection.doc(userId).set(newDoner.toMap());
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (context) => MainDashboard()),
+                              builder: (context) => LoginScreen()),
                         );
                       }
                     } catch (e) {

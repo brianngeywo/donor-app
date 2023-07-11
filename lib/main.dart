@@ -65,7 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
         } else {
           // Auth state received
           User? user = snapshot.data;
-          AuthManager().setCurrentUser(user);
           return _buildContent(user);
         }
       },

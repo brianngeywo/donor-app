@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 import 'donation_model.dart';
+import 'donations_service.dart';
 
 class MakeDonationScreen extends StatefulWidget {
   @override
@@ -91,7 +92,7 @@ class _MakeDonationScreenState extends State<MakeDonationScreen> {
                         });
                       },
                       child: Text(selectedDateTime != null
-                          ? formatDate(selectedDateTime!)
+                          ? formatDateOnly(selectedDateTime!)
                           : 'Select Date'),
                     ),
                   ],
@@ -114,27 +115,11 @@ class _MakeDonationScreenState extends State<MakeDonationScreen> {
                     // Additional properties specific to food donation, such as specific food item, can be added to the Donation model and assigned here.
 
                     // Retrieve existing list of donations from the document
-                    DocumentSnapshot documentSnapshot = await donorsCollection
-                        .doc(AuthManager().currentUser!.uid)
-                        .get();
-                    if (documentSnapshot.exists) {
-                      List<Donation> existingDonations =
-                          List<Donation>.from(documentSnapshot['donations']);
-                      existingDonations
-                          .add(donation); // Add the new donation to the list
-                      await donorsCollection
-                          .doc(AuthManager().currentUser!.uid)
-                          .update({
-                        'donations': existingDonations,
-                      });
-                    } else {
-                      // If the document doesn't exist, create a new one with the initial donation
-                      await donorsCollection
-                          .doc(AuthManager().currentUser!.uid)
-                          .set({
-                        'donations': [donation],
-                      });
-                    }
+
+                    DonationService().createDonationForDonor(
+                        donorId: AuthManager().currentUser!.uid,
+                        donation: donation);
+
                     print('Donation added: ${donation.item}');
                   },
                   child: const Text('Submit',
@@ -197,9 +182,9 @@ class _MakeDonationScreenState extends State<MakeDonationScreen> {
 
                     // Use the donation object as needed
                     // Use the donation object as needed
-                    donorsCollection
-                        .doc(AuthManager().currentUser!.uid)
-                        .set(donation.toMap());
+                    DonationService().createDonationForDonor(
+                        donorId: "lm3jdbzl1Ub7Neq4LuEUeMfy6cY2",
+                        donation: donation);
                     print('Donation added: ${donation.item}');
                   },
                   child: const Text('Submit',
