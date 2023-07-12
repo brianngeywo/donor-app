@@ -1,22 +1,22 @@
-import 'package:donor_app/default_screen.dart';
-import 'package:donor_app/make_donation_screen.dart';
-import 'package:donor_app/organization_donation_events.dart';
-import 'package:donor_app/previous_donations_screen.dart';
+import 'default_screen.dart';
+import 'package:donor_app/donor_dashboard/previous_donations_screen.dart';
+import 'make_donation_screen.dart';
+import 'package:donor_app/donor_dashboard/organization_donation_events.dart';
 import 'package:donor_app/test_datas.dart';
 import 'package:flutter/material.dart';
 
 import 'dashboard_sidebar.dart';
-import 'main_app_bar.dart';
+import '../main_app_bar.dart';
 import 'my_donations_screen.dart';
 import 'organization_donation_details_screen.dart';
 import 'organization_donation_model.dart';
 
-class MainDashboard extends StatefulWidget {
+class MainDonorDashboard extends StatefulWidget {
   @override
-  _MainDashboardState createState() => _MainDashboardState();
+  _MainDonorDashboardState createState() => _MainDonorDashboardState();
 }
 
-class _MainDashboardState extends State<MainDashboard> {
+class _MainDonorDashboardState extends State<MainDonorDashboard> {
   String selectedPage = 'Make Donation';
 
   @override
@@ -26,7 +26,7 @@ class _MainDashboardState extends State<MainDashboard> {
       body: Center(
         child: Row(
           children: [
-            DashboardSidebar(
+            DonorDashboardSidebar(
               onItemSelected: (String item) {
                 setState(() {
                   selectedPage = item;

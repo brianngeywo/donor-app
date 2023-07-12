@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:donor_app/donation_model.dart';
+
+import '../models/donation_model.dart';
 
 class DonationService {
   final CollectionReference donorsCollection =

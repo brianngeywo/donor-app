@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:donor_app/organization_donation_model.dart';
+import 'organization_donation_model.dart';
 import 'package:flutter/material.dart';
 
 import 'dashboard_sidebar.dart';
-import 'main_app_bar.dart';
+import '../main_app_bar.dart';
 
 class OrganizationDonationDetailsScreen extends StatefulWidget {
   final OrganizationDonation organizationDonation;
@@ -30,7 +30,7 @@ class _OrganizationDonationDetailsScreenState
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DashboardSidebar(
+          DonorDashboardSidebar(
             onItemSelected: (String item) {
               setState(() {
                 selectedPage = item;

@@ -1,17 +1,19 @@
-import 'package:donor_app/auth_service.dart';
-import 'package:donor_app/main_dashboard.dart';
-import 'package:donor_app/signup.dart';
+import 'package:donor_app/models/user_model.dart';
+import '../services/auth_manager.dart';
+import 'package:donor_app/donor_dashboard/login.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
+import '../services/auth_service.dart';
+
+class DonorSignUpScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<DonorSignUpScreen> createState() => _DonorSignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _DonorSignUpScreenState extends State<DonorSignUpScreen> {
   String email = '';
-
   String password = '';
+  String name = '';
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +34,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const Text(
-                'Login',
+                'Sign Up',
                 style: TextStyle(fontSize: 26.0),
               ),
+              const SizedBox(height: 32.0),
+              TextField(
+                onChanged: (value) {
+                  // Handle name input
+                  setState(() {
+                    name = value;
+                  });
+                },
+                decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              const SizedBox(height: 16.0),
               TextField(
                 onChanged: (value) {
                   // Handle email input
@@ -61,24 +74,45 @@ class _LoginScreenState extends State<LoginScreen> {
                   minimumSize: const Size(double.infinity, 48.0),
                   primary: Colors.deepPurple,
                 ),
-                onPressed: () {
-                  // Handle login button press
-                  if (email.isNotEmpty || password.isNotEmpty) {
-                    AuthService().signInWithEmailAndPassword(email, password);
-                    Future.delayed(const Duration(seconds: 2), () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => MainDashboard()));
-                    });
+                onPressed: () async {
+                  if (email.isNotEmpty && password.isNotEmpty) {
+                    try {
+                      // Create user account
+                      await AuthService()
+                          .createUserWithEmailAndPassword(email, password);
+
+                      // Check if user is signed in
+                      if (AuthManager().currentUser != null) {
+                        String userId = AuthManager().currentUser!.uid;
+                        print("user id: " + userId);
+                        UserModel newUser = UserModel(
+                          id: userId,
+                          email: email,
+                          password: password,
+                          name: name,
+                          role: UserRole.Donor,
+                        );
+                        // Save user details to Firestore database
+                        // TODO: Add code to save newUser to the database
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => DonorLoginScreen()),
+                        );
+                      }
+                    } catch (e) {
+                      // Handle any errors that occurred during sign-up
+                      print('Sign-up error: $e');
+                    }
                   }
                 },
                 child: const Text(
-                  'LOGIN',
+                  'SIGN UP',
                   style: TextStyle(fontSize: 13.0, color: Colors.white),
                 ),
               ),
               const SizedBox(height: 16.0),
               const Text(
-                'Don\'t have an account?',
+                'Already have an account?',
                 style: TextStyle(fontSize: 13.0),
               ),
               const SizedBox(height: 8.0),
@@ -86,14 +120,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 48.0),
                   primary: Colors.deepPurple,
-                  backgroundColor: Colors.deepPurple.shade100,
+                  backgroundColor: Colors.deepPurple[50],
                 ),
                 onPressed: () {
+                  // Navigate to the login screen
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => SignUpScreen()));
+                    MaterialPageRoute(builder: (context) => DonorLoginScreen()),
+                  );
                 },
                 child: const Text(
-                  'REGISTER',
+                  'LOGIN',
                   style: TextStyle(fontSize: 13.0, color: Colors.deepPurple),
                 ),
               ),

@@ -13,10 +13,3 @@ String formatDate(DateTime dateTime) {
   String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
   return formattedDate;
 }
-
-// create firestore donors collecion
-CollectionReference<Map<String, dynamic>> donorsCollection =
-    FirebaseFirestore.instance.collection('donors');
-// create firestore donations collection
-CollectionReference<Map<String, dynamic>> donationsCollection =
-    FirebaseFirestore.instance.collection('donations');

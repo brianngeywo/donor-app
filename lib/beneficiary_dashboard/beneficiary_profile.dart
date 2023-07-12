@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
-import 'donation_model.dart';
+import '../models/donation_model.dart';
 
-class DonorProfileScreen extends StatelessWidget {
+class BeneficiaryProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Donor Profile'),
+        title: const Text('Beneficiary Profile'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -41,15 +42,16 @@ class DonorProfileScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   // Replace with actual donation data
                   var donation = Donation(
-                    id: '1',
-                    item: 'Food',
-                    quantity: 5,
-                    dateTime: DateTime.now(),
+                    id: Uuid().v4(),
+                    donorId: '',
+                    donationType: DonationType.Clothes,
+                    donationDate: DateTime.now(),
+                    additionalDetails: '',
                   );
+
                   return ListTile(
-                    leading: Text(donation.item),
-                    title: Text('Quantity: ${donation.quantity}'),
-                    subtitle: Text('Date: ${donation.dateTime.toString()}'),
+                    leading: Text(donation.donationType.name),
+                    subtitle: Text('Date: ${donation.donationDate.toString()}'),
                     trailing:
                         const Text('Status'), // Replace with donation status
                   );

@@ -1,12 +1,12 @@
-import 'package:donor_app/auth_manager.dart';
-import 'package:intl/intl.dart';
-import 'package:donor_app/constants.dart';
-import 'package:donor_app/donation_model.dart';
+import 'package:donor_app/donor_dashboard/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/donation_model.dart';
+
 class MyDonationsScreen extends StatelessWidget {
-  final CollectionReference donationsCollection = donorsCollection
+  final CollectionReference donationsCollection = FirebaseFirestore.instance
+      .collection("users")
       .doc("lm3jdbzl1Ub7Neq4LuEUeMfy6cY2")
       .collection('donations');
 
@@ -35,10 +35,9 @@ class MyDonationsScreen extends StatelessWidget {
                   title: Text(formatDateOnly(DateTime.parse(date))),
                   children: donationsForDate.map((donation) {
                     return ListTile(
-                      title: Text('Donation Type: ${donation.item}'),
-                      subtitle: Text('Quantity: ${donation.quantity}'),
-                      trailing:
-                          Text('Date: ${formatDateAndTime(donation.dateTime)}'),
+                      title: Text('Donation Type: ${donation.donationType}'),
+                      subtitle: Text(
+                          'Date Requested: ${formatDateAndTime(donation.donationDate)}'),
                     );
                   }).toList(),
                 );
@@ -60,7 +59,7 @@ class MyDonationsScreen extends StatelessWidget {
 
     for (DocumentSnapshot doc in donationDocs) {
       Donation donation = Donation.fromMap(doc.data() as Map<String, dynamic>);
-      String date = formatDate(donation.dateTime);
+      String date = formatDate(donation.donationDate);
 
       if (donationsByDate.containsKey(date)) {
         donationsByDate[date]!.add(donation);

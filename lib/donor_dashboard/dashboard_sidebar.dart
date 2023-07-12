@@ -1,10 +1,10 @@
-import 'package:donor_app/auth_service.dart';
+import '../services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-class DashboardSidebar extends StatelessWidget {
+class DonorDashboardSidebar extends StatelessWidget {
   final Function(String) onItemSelected;
 
-  DashboardSidebar({required this.onItemSelected});
+  DonorDashboardSidebar({required this.onItemSelected});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:donor_app/organization_donation_details_screen.dart';
+import 'organization_donation_details_screen.dart';
 import 'package:donor_app/test_datas.dart';
 import 'package:flutter/material.dart';
 

@@ -1,48 +1,6 @@
-// Static test data
-import 'package:donor_app/donation_model.dart';
-import 'package:donor_app/donor_model.dart';
-import 'package:donor_app/organization_donation_model.dart';
-
-List<Donor> testDonors = [
-  Donor(
-    id: '1',
-    name: 'John Baraka',
-    donations: [
-      Donation(id: '1', item: 'Food', quantity: 5, dateTime: DateTime.now()),
-      Donation(id: '2', item: 'Money', quantity: 100, dateTime: DateTime.now()),
-    ],
-    email: '',
-    password: "",
-    phone: '',
-    address: '',
-  ),
-  Donor(
-    id: '2',
-    name: 'Tabitha Mutai',
-    donations: [
-      Donation(
-          id: '3', item: 'Clothes', quantity: 10, dateTime: DateTime.now()),
-      Donation(id: '4', item: 'Food', quantity: 3, dateTime: DateTime.now()),
-    ],
-    email: '',
-    password: "",
-    phone: '',
-    address: '',
-  ),
-  Donor(
-    id: '3',
-    name: 'Yvonne Johnson',
-    donations: [
-      Donation(id: '5', item: 'Money', quantity: 50, dateTime: DateTime.now()),
-    ],
-    email: '',
-    password: "",
-    phone: '',
-    address: '',
-  ),
-];
-
-enum DonationType { food, clothes, money }
+import 'donor_dashboard/organization_donation_model.dart';
+import 'models/donation_model.dart';
+import 'models/donation_request_model.dart';
 
 final List<OrganizationDonation> organizationDonations = [
   OrganizationDonation(
@@ -189,5 +147,57 @@ Elit pellentesque habitant morbi tristique senectus et. Parturient montes nascet
 Nulla posuere sollicitudin aliquam ultrices sagittis orci a scelerisque. Massa vitae tortor condimentum lacinia quis vel. Nam libero justo laoreet sit. Vel fringilla est ullamcorper eget. Luctus venenatis lectus magna fringilla urna porttitor. Malesuada proin libero nunc consequat. Purus non enim praesent elementum. Morbi tempus iaculis urna id volutpat lacus laoreet non. Sed id semper risus in hendrerit gravida rutrum quisque non. Id velit ut tortor pretium viverra suspendisse potenti nullam. Habitasse platea dictumst quisque sagittis purus. Nibh cras pulvinar mattis nunc sed blandit libero volutpat sed. Sed velit dignissim sodales ut eu sem integer vitae justo. Tortor at auctor urna nunc id cursus metus. Orci sagittis eu volutpat odio facilisis mauris sit amet. Aliquam vestibulum morbi blandit cursus risus at ultrices mi. Tristique magna sit amet purus gravida quis blandit. Condimentum vitae sapien pellentesque habitant morbi tristique senectus et.
 
 Amet dictum sit amet justo. Tristique senectus et netus et malesuada. Consectetur a erat nam at lectus. Sagittis id consectetur purus ut faucibus pulvinar elementum. Eget mi proin sed libero. Ac felis donec et odio pellentesque. Mattis aliquam faucibus purus in massa tempor. Felis imperdiet proin fermentum leo vel orci porta non. Vulputate odio ut enim blandit. Turpis in eu mi bibendum neque egestas congue quisque egestas.''',
+  ),
+];
+
+List<DonationRequest> testDonationRequests = [
+  DonationRequest(
+    id: '1',
+    requesterId: 'user1',
+    requestType: DonationType.Food,
+    requestDate: DateTime.now(),
+    requestMessage: 'Request 1: Food donation',
+  ),
+  DonationRequest(
+    id: '2',
+    requesterId: 'user2',
+    requestType: DonationType.Clothes,
+    requestDate: DateTime.now(),
+    requestMessage: 'Request 2: Clothes donation',
+  ),
+  DonationRequest(
+    id: '3',
+    requesterId: 'user3',
+    requestType: DonationType.Money,
+    requestDate: DateTime.now(),
+    requestMessage: 'Request 3: Money donation',
+  ),
+  DonationRequest(
+    id: '4',
+    requesterId: 'user4',
+    requestType: DonationType.Food,
+    requestDate: DateTime.now(),
+    requestMessage: 'Request 4: Food donation',
+  ),
+  DonationRequest(
+    id: '5',
+    requesterId: 'user5',
+    requestType: DonationType.Clothes,
+    requestDate: DateTime.now(),
+    requestMessage: 'Request 5: Clothes donation',
+  ),
+  DonationRequest(
+    id: '6',
+    requesterId: 'user6',
+    requestType: DonationType.Money,
+    requestDate: DateTime.now(),
+    requestMessage: 'Request 6: Money donation',
+  ),
+  DonationRequest(
+    id: '7',
+    requesterId: 'user7',
+    requestType: DonationType.Food,
+    requestDate: DateTime.now(),
+    requestMessage: 'Request 7: Food donation',
   ),
 ];

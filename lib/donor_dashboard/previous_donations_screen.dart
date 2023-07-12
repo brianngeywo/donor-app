@@ -1,6 +1,6 @@
-import 'package:donor_app/donations_service.dart';
+import '../services/donations_service.dart';
 import 'package:flutter/material.dart';
-import 'package:donor_app/donation_model.dart';
+import '../models/donation_model.dart';
 
 import 'constants.dart';
 
@@ -32,10 +32,9 @@ class PreviousDonationsScreen extends StatelessWidget {
                   title: Text(formatDateOnly(DateTime.parse(date))),
                   children: donations.map((donation) {
                     return ListTile(
-                      title: Text('Donation Type: ${donation.item}'),
-                      subtitle: Text('Quantity: ${donation.quantity}'),
-                      trailing:
-                          Text('Date: ${formatDateAndTime(donation.dateTime)}'),
+                      title: Text('Donation Type: ${donation.donationType}'),
+                      trailing: Text(
+                          'Date Requested: ${formatDateAndTime(donation.donationDate)}'),
                     );
                   }).toList(),
                 );
@@ -55,7 +54,7 @@ class PreviousDonationsScreen extends StatelessWidget {
     Map<String, List<Donation>> donationsByDate = {};
 
     for (Donation donation in donations) {
-      String date = formatDate(donation.dateTime);
+      String date = formatDate(donation.donationDate);
 
       if (donationsByDate.containsKey(date)) {
         donationsByDate[date]!.add(donation);
