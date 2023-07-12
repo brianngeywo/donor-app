@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:donor_app/organization_donation_details_screen.dart';
 import 'package:donor_app/test_datas.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,8 @@ class _OrganizationDonationEventsScreenState
             },
             child: GridTile(
               child: Image.network(
-                donation.images[0], // Display the first image
+                donation.images[Random().nextInt(
+                    donation.images.length)], // Display the first image
                 fit: BoxFit.cover,
               ),
               footer: GridTileBar(

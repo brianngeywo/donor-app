@@ -20,12 +20,37 @@ class _MakeDonationScreenState extends State<MakeDonationScreen> {
   String pickupAddress = '';
   DateTime? selectedDateTime;
   String selectedDay = 'Monday';
+  bool switchValue = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [
+          const SizedBox(height: 16.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                'Make a Donation anonymously',
+                style: TextStyle(fontSize: 16.0),
+              ),
+              const SizedBox(width: 16.0),
+              SizedBox(
+                height: 10.0,
+                child: Switch(
+                  value: switchValue,
+                  onChanged: (value) {
+                    setState(() {
+                      switchValue = value;
+                    });
+                  },
+                  activeColor: Colors.deepPurple,
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 16.0),
           const Text(
             'Donation Type',
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
