@@ -40,19 +40,11 @@ class BeneficiaryDashboardSidebar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.history_outlined, color: Colors.white),
-            title: const Text("Recipient History",
+            leading: const Icon(Icons.pending, color: Colors.white),
+            title: const Text('Pending Donations',
                 style: TextStyle(color: Colors.white)),
             onTap: () {
-              onItemSelected('Recipient History');
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.history_outlined, color: Colors.white),
-            title: const Text('Previous Donations',
-                style: TextStyle(color: Colors.white)),
-            onTap: () {
-              onItemSelected('Previous Donations');
+              onItemSelected('Pending Donations');
             },
           ),
           ListTile(

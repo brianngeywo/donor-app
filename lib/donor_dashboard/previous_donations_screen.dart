@@ -7,6 +7,8 @@ import 'constants.dart';
 class PreviousDonationsScreen extends StatelessWidget {
   final DonationService donationService = DonationService();
 
+  PreviousDonationsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +16,7 @@ class PreviousDonationsScreen extends StatelessWidget {
         title: Text('Previous Donations'),
       ),
       body: StreamBuilder<List<Donation>>(
-        stream: donationService.getAllDonationsAsStream(),
+        stream: DonationService().getAllDonationsForAllUsersAsStream(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Donation> allDonations = snapshot.data!;

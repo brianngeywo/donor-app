@@ -93,7 +93,16 @@ class _DonorSignUpScreenState extends State<DonorSignUpScreen> {
                           role: UserRole.Donor,
                         );
                         // Save user details to Firestore database
-                        // TODO: Add code to save newUser to the database
+                        await AuthService().saveUserDetailsToFirestore(newUser);
+                        // show success snackbar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Sign-up successful!',
+                                style: TextStyle(color: Colors.white)),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                        // Navigate to the login screen
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                               builder: (context) => DonorLoginScreen()),

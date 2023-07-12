@@ -15,6 +15,14 @@ class DonorDashboardSidebar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           ListTile(
+            leading: const Icon(Icons.account_circle, color: Colors.white),
+            title: const Text('Your Profile',
+                style: TextStyle(color: Colors.white)),
+            onTap: () {
+              onItemSelected('Your Profile');
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.add, color: Colors.white),
             title: const Text('Make Donation',
                 style: TextStyle(color: Colors.white)),

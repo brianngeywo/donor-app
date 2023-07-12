@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import '../models/donation_request_model.dart';
 import '../services/donation_requests_service.dart';
 
-class ApprovedDonationsPage extends StatelessWidget {
-  const ApprovedDonationsPage({super.key});
+class PendingDonationsPage extends StatelessWidget {
+  const PendingDonationsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ApprovedDonationsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Approved Donations',
+              'Pending Donations',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -28,7 +28,7 @@ class ApprovedDonationsPage extends StatelessWidget {
             Expanded(
               child: StreamBuilder<List<DonationRequest>>(
                   stream: DonationRequestService()
-                      .getAcceptedDonationRequestsForUser(
+                      .getUnacceptedDonationRequestsForUser(
                           AuthManager().currentUser!.uid),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -63,8 +63,8 @@ class ApprovedDonationsPage extends StatelessWidget {
                                     'Request Date: ${formatDateOnly(donationRequest.requestDate)}'),
                               ],
                             ),
-                            leading: const Icon(Icons.check_circle,
-                                color: Colors.green),
+                            leading: const Icon(Icons.info_outline,
+                                color: Colors.blueGrey),
                           );
                         },
                       );

@@ -1,82 +1,48 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/donation_model.dart';
+import '../services/auth_manager.dart';
 
 class DonationService {
-  final CollectionReference donorsCollection =
-      FirebaseFirestore.instance.collection('donors');
+  final CollectionReference donationsCollection =
+      FirebaseFirestore.instance.collection('donations');
 
-  // Create a new donation for a specific donor
-  Future<void> createDonationForDonor(
-      {required String donorId, required Donation donation}) {
-    return donorsCollection
-        .doc(donorId)
-        .collection('donations')
-        .doc(donation.id)
-        .set(donation.toMap());
-  }
-
-  // Update an existing donation for a specific donor
-  Future<void> updateDonationForDonor(
-      {required String donorId, required Donation donation}) {
-    return donorsCollection
-        .doc(donorId)
-        .collection('donations')
-        .doc(donation.id)
-        .update(donation.toMap());
-  }
-
-  // Delete a donation for a specific donor
-  Future<void> deleteDonationForDonor(
-      {required String donorId, required String donationId}) {
-    return donorsCollection
-        .doc(donorId)
-        .collection('donations')
-        .doc(donationId)
-        .delete();
-  }
-
-  // Fetch all donations for a specific donor
-  Stream<List<Donation>> fetchAllDonationsForDonor({required String donorId}) {
-    return donorsCollection
-        .doc(donorId)
-        .collection('donations')
-        .snapshots()
-        .map((snapshot) {
-      return snapshot.docs.map((doc) => Donation.fromMap(doc.data())).toList();
+  Stream<List<Donation>> getAllDonationsForAllUsersAsStream() {
+    return donationsCollection.snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return Donation.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
     });
   }
 
-  // Fetch a specific donation for a specific donor by ID
-  Future<Donation?> fetchDonationForDonorById(
-      String donorId, String donationId) async {
-    DocumentSnapshot snapshot = await donorsCollection
-        .doc(donorId)
-        .collection('donations')
-        .doc(donationId)
-        .get();
+  Stream<List<Donation>> getAllDonationsForSpecificUserAsStream(String userId) {
+    final userDonationsCollection =
+        donationsCollection.where('donorId', isEqualTo: userId);
 
-    if (snapshot.exists) {
-      return Donation.fromMap(snapshot.data() as Map<String, dynamic>);
-    } else {
-      return null;
-    }
+    return userDonationsCollection.snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return Donation.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
+    });
   }
 
-  Stream<List<Donation>> getAllDonationsAsStream() {
-    return donorsCollection.snapshots().asyncMap((snapshot) async {
-      List<Donation> allDonations = [];
+  Future<void> addDonation(Donation donation) async {
+    try {
+      final user = AuthManager().currentUser;
+      if (user != null) {
+        final donorId = user.uid;
 
-      for (var donorDoc in snapshot.docs) {
-        var donationDocs =
-            await donorDoc.reference.collection('donations').get();
-        var donations = donationDocs.docs
-            .map((doc) => Donation.fromMap(doc.data() as Map<String, dynamic>))
-            .toList();
-        allDonations.addAll(donations);
+        // Add the donation to the collection
+        await donationsCollection.add({
+          ...donation.toMap(),
+          'donorId': donorId,
+        });
+
+        print('Donation added: ${donation.donationType}');
       }
-
-      return allDonations;
-    });
+    } catch (e) {
+      print('Error adding donation: $e');
+      // Handle the error as needed
+    }
   }
 }

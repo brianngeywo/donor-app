@@ -1,4 +1,4 @@
-import '../test_datas.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'donation_model.dart';
 
 class DonationRequest {
@@ -7,6 +7,7 @@ class DonationRequest {
   final DonationType requestType;
   final DateTime requestDate;
   final String requestMessage;
+  final bool isAccepted;
 
   DonationRequest({
     required this.id,
@@ -14,26 +15,31 @@ class DonationRequest {
     required this.requestType,
     required this.requestDate,
     required this.requestMessage,
+    required this.isAccepted,
   });
-  //toMap method
+
+  // ToMap method
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'requesterId': requesterId,
-      'requestType': requestType,
-      'requestDate': requestDate,
+      'requestType': requestType.toString().split('.').last,
+      'requestDate': Timestamp.fromDate(requestDate),
       'requestMessage': requestMessage,
+      'isAccepted': isAccepted,
     };
   }
 
-  //frommap method
+  // FromMap method
   factory DonationRequest.fromMap(Map<String, dynamic> map) {
     return DonationRequest(
       id: map['id'],
       requesterId: map['requesterId'],
-      requestType: map['requestType'],
-      requestDate: map['requestDate'],
+      requestType: DonationType.values.firstWhere(
+          (type) => type.toString() == 'DonationType.${map['requestType']}'),
+      requestDate: (map['requestDate'] as Timestamp).toDate(),
       requestMessage: map['requestMessage'],
+      isAccepted: map['isAccepted'],
     );
   }
 }

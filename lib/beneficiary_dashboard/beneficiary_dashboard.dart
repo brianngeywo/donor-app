@@ -1,4 +1,5 @@
 import 'package:donor_app/beneficiary_dashboard/beneficiary_profile.dart';
+import 'package:donor_app/beneficiary_dashboard/pending_donations_page.dart';
 import 'package:donor_app/beneficiary_dashboard/request_donation.dart';
 
 import '../donor_dashboard/organization_donation_details_screen.dart';
@@ -10,8 +11,6 @@ import 'package:donor_app/donor_dashboard/previous_donations_screen.dart';
 import 'package:donor_app/donor_dashboard/organization_donation_events.dart';
 import 'package:donor_app/test_datas.dart';
 import 'package:flutter/material.dart';
-
-import 'beneficiary_history.dart';
 
 class MainBeneficiaryDashboard extends StatefulWidget {
   @override
@@ -60,32 +59,29 @@ class _MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
     switch (widget.selectedPage) {
+      case 'view event':
+        return OrganizationDonationDetailsScreen(
+          organizationDonation: widget.organizationDonation!,
+        );
       case 'Your Profile':
         return Padding(
           padding: const EdgeInsets.all(12.0),
           child: BeneficiaryProfileScreen(),
         );
-      case 'Recipient History':
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: MyBeneficiaryDonationsScreen(),
-        );
       case 'Approved Donations':
-        return Padding(
+        return const Padding(
           padding: EdgeInsets.all(12.0),
-          child: ApprovedDonationsPage(
-            approvedDonations: testDonationRequests,
-          ),
+          child: ApprovedDonationsPage(),
+        );
+      case 'Pending Donations':
+        return const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: PendingDonationsPage(),
         );
       case 'Request Donation':
-        return Padding(
+        return const Padding(
           padding: EdgeInsets.all(12.0),
           child: DonationRequestPage(),
-        );
-      case 'Previous Donations':
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: PreviousDonationsScreen(),
         );
       case 'Organization Donation Events':
         return Padding(
@@ -94,6 +90,11 @@ class _MainContentState extends State<MainContent> {
             onItemSelected: (String item) {
               setState(() {
                 widget.selectedPage = item;
+              });
+            },
+            organizationDonation: (OrganizationDonation donation) {
+              setState(() {
+                widget.organizationDonation = donation;
               });
             },
           ),

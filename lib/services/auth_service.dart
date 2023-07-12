@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:donor_app/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'auth_manager.dart';
@@ -39,5 +41,19 @@ class AuthService {
 
   Stream<User?> get authStateChanges {
     return _firebaseAuth.authStateChanges();
+  }
+
+  saveUserDetailsToFirestore(UserModel newUser) {
+    try {
+      final user = AuthManager().currentUser;
+      if (user != null) {
+        final userId = user.uid;
+        final userCollection = FirebaseFirestore.instance.collection('users');
+        userCollection.doc(userId).set(newUser.toMap());
+      }
+    } catch (e) {
+      print('Error adding user: $e');
+      // Handle the error as needed
+    }
   }
 }

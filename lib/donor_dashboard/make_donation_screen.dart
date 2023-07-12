@@ -3,7 +3,6 @@ import 'package:uuid/uuid.dart';
 
 import '../models/donation_model.dart';
 import '../services/auth_manager.dart';
-import '../services/donations_service.dart';
 
 class MakeDonationScreen extends StatefulWidget {
   const MakeDonationScreen({super.key});
@@ -84,11 +83,6 @@ class _MakeDonationScreenState extends State<MakeDonationScreen> {
                 donationType: selectedDonationType,
                 donationDate: DateTime.now(),
                 additionalDetails: additionalDetails,
-              );
-
-              DonationService().createDonationForDonor(
-                donorId: AuthManager().currentUser!.uid,
-                donation: donation,
               );
 
               print('Donation added: ${donation.donationType}');

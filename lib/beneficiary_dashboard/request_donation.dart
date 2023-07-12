@@ -1,16 +1,21 @@
+import 'package:donor_app/services/auth_manager.dart';
+import 'package:donor_app/services/donation_requests_service.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/donation_model.dart';
 import '../models/donation_request_model.dart';
 
 class DonationRequestPage extends StatefulWidget {
+  const DonationRequestPage({super.key});
+
   @override
   _DonationRequestPageState createState() => _DonationRequestPageState();
 }
 
 class _DonationRequestPageState extends State<DonationRequestPage> {
   DonationType selectedDonationType = DonationType.Food;
-  String requestMessage = '';
+  TextEditingController _messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +75,13 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
               ),
               const SizedBox(height: 24),
               TextField(
+                controller: _messageController,
                 decoration: const InputDecoration(
                   labelText: 'Additional Message',
                 ),
                 onChanged: (value) {
                   setState(() {
-                    requestMessage = value;
+                    _messageController.text = value;
                   });
                 },
               ),
@@ -86,15 +92,17 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
                   final DateTime requestDate = DateTime.now();
 
                   DonationRequest donationRequest = DonationRequest(
-                    id: '',
-                    requesterId: '',
+                    id: Uuid().v4(),
+                    requesterId: AuthManager().currentUser!.uid,
                     requestType: donationType,
                     requestDate: requestDate,
-                    requestMessage: requestMessage,
+                    requestMessage: _messageController.text,
+                    isAccepted: false,
                   );
 
                   // Perform further actions with the donationRequest
-                  // such as sending it to a server or processing it locally
+                  DonationRequestService()
+                      .createDonationRequest(donationRequest);
 
                   // Display a success message or navigate to another page
                   showDialog(
@@ -107,6 +115,11 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
                         actions: [
                           TextButton(
                             onPressed: () {
+                              // Reset the form
+                              setState(() {
+                                selectedDonationType = DonationType.Food;
+                                _messageController.text = '';
+                              });
                               Navigator.pop(context);
                             },
                             child: const Text('OK'),

@@ -2,7 +2,7 @@ import 'package:donor_app/donor_dashboard/signup.dart';
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
-import 'main_dashboard.dart';
+import 'main_donor_dashboard.dart';
 
 class DonorLoginScreen extends StatefulWidget {
   @override

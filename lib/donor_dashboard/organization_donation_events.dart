@@ -8,8 +8,12 @@ import 'organization_donation_model.dart';
 
 class OrganizationDonationEventsScreen extends StatefulWidget {
   Function(String) onItemSelected;
+  Function(OrganizationDonation) organizationDonation;
 
-  OrganizationDonationEventsScreen({super.key, required this.onItemSelected});
+  OrganizationDonationEventsScreen(
+      {super.key,
+      required this.onItemSelected,
+      required this.organizationDonation});
 
   @override
   State<OrganizationDonationEventsScreen> createState() =>
@@ -36,21 +40,10 @@ class _OrganizationDonationEventsScreenState
           return GestureDetector(
             onTap: () {
               // Handle onTap event
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => OrganizationDonationDetailsScreen(
-                    organizationDonation: donation,
-                  ),
-                ),
-              );
+              widget.onItemSelected("view event");
+              widget.organizationDonation(donation);
             },
             child: GridTile(
-              child: Image.network(
-                donation.images[Random().nextInt(
-                    donation.images.length)], // Display the first image
-                fit: BoxFit.cover,
-              ),
               footer: GridTileBar(
                 backgroundColor: Colors.black54,
                 title: Text(
@@ -61,6 +54,11 @@ class _OrganizationDonationEventsScreenState
                   '${donation.location}, ${donation.time}',
                   textAlign: TextAlign.center,
                 ),
+              ),
+              child: Image.network(
+                donation.images[Random().nextInt(
+                    donation.images.length)], // Display the first image
+                fit: BoxFit.cover,
               ),
             ),
           );

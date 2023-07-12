@@ -1,3 +1,5 @@
+import 'package:donor_app/donor_dashboard/donor_profile_screen.dart';
+
 import 'default_screen.dart';
 import 'package:donor_app/donor_dashboard/previous_donations_screen.dart';
 import 'make_donation_screen.dart';
@@ -17,7 +19,7 @@ class MainDonorDashboard extends StatefulWidget {
 }
 
 class _MainDonorDashboardState extends State<MainDonorDashboard> {
-  String selectedPage = 'Make Donation';
+  String selectedPage = 'Your Profile';
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +59,14 @@ class _MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
     switch (widget.selectedPage) {
-      case 'Home':
+      case 'Your Profile':
         return Padding(
           padding: const EdgeInsets.all(12.0),
-          child: DefaultScreen(),
+          child: DonorProfileScreen(),
         );
       case 'Make Donation':
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
+        return const Padding(
+          padding: EdgeInsets.all(12.0),
           child: MakeDonationScreen(),
         );
       case 'My Donations':
@@ -86,14 +88,16 @@ class _MainContentState extends State<MainContent> {
                 widget.selectedPage = item;
               });
             },
+            organizationDonation: (OrganizationDonation donation) {
+              setState(() {
+                widget.organizationDonation = donation;
+              });
+            },
           ),
         );
       case 'view event':
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: OrganizationDonationDetailsScreen(
-            organizationDonation: organizationDonations[0],
-          ),
+        return OrganizationDonationDetailsScreen(
+          organizationDonation: widget.organizationDonation!,
         );
       default:
         return Container();
