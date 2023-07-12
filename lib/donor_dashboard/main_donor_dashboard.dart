@@ -79,7 +79,7 @@ class _MainContentState extends State<MainContent> {
           padding: const EdgeInsets.all(12.0),
           child: PreviousDonationsScreen(),
         );
-      case 'Organization Donation Events':
+      case 'Organization Events':
         return Padding(
           padding: const EdgeInsets.all(12.0),
           child: OrganizationDonationEventsScreen(

@@ -1,3 +1,4 @@
+import 'package:donor_app/services/donations_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -13,7 +14,6 @@ class MakeDonationScreen extends StatefulWidget {
 
 class _MakeDonationScreenState extends State<MakeDonationScreen> {
   DonationType selectedDonationType = DonationType.Clothes;
-  String additionalDetails = '';
   final TextEditingController additionalDetailsController =
       TextEditingController();
 
@@ -61,7 +61,7 @@ class _MakeDonationScreenState extends State<MakeDonationScreen> {
                 controller: additionalDetailsController,
                 onChanged: (value) {
                   setState(() {
-                    additionalDetails = value;
+                    additionalDetailsController.text = value;
                   });
                 },
                 decoration: const InputDecoration(
@@ -82,10 +82,33 @@ class _MakeDonationScreenState extends State<MakeDonationScreen> {
                 donorId: AuthManager().currentUser!.uid,
                 donationType: selectedDonationType,
                 donationDate: DateTime.now(),
-                additionalDetails: additionalDetails,
+                additionalDetails: additionalDetailsController.text,
               );
-
-              print('Donation added: ${donation.donationType}');
+              DonationService().addDonation(donation);
+              // Display a success message
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Success'),
+                    content:
+                        const Text('Donation has been confirmed successfully'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          // Reset the form
+                          setState(() {
+                            selectedDonationType = DonationType.Clothes;
+                            additionalDetailsController.clear();
+                          });
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             child: const Text(
               'Submit',

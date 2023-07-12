@@ -1,3 +1,4 @@
+import 'package:donor_app/donor_dashboard/constants.dart';
 import 'package:donor_app/services/donations_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -101,7 +102,7 @@ class _DonorProfileScreenState extends State<DonorProfileScreen> {
                               return ListTile(
                                 leading: Text(donation.donationType.name),
                                 subtitle: Text(
-                                    'Date: ${donation.donationDate.toString()}'),
+                                    'Date: ${formatDateAndTime(donation.donationDate)}'),
                               );
                             },
                           );

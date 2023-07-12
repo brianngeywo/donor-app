@@ -1,3 +1,4 @@
+import 'package:donor_app/donor_dashboard/constants.dart';
 import 'package:donor_app/services/donation_requests_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -103,7 +104,7 @@ class _BeneficiaryProfileScreenState extends State<BeneficiaryProfileScreen> {
                                   leading:
                                       Text(donationRequest.requestType.name),
                                   subtitle: Text(
-                                      'Date: ${donationRequest.requestDate.toString()}'),
+                                      'Date: ${formatDateAndTime(donationRequest.requestDate)}'),
                                   trailing: Column(
                                     children: [
                                       const Text('Status'),

@@ -48,10 +48,10 @@ class DonorDashboardSidebar extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.event, color: Colors.white),
-            title: const Text('Organization Donation Events',
+            title: const Text('Organization Events',
                 style: TextStyle(color: Colors.white)),
             onTap: () {
-              onItemSelected('Organization Donation Events');
+              onItemSelected('Organization Events');
             },
           ),
           ListTile(

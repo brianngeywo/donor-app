@@ -12,25 +12,34 @@ class Donation {
     required this.donationDate,
     required this.additionalDetails,
   });
-  //toMap method
+
+  // toMap method
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'donorId': donorId,
-      'donationType': donationType,
-      'donationDate': donationDate,
+      'donationType': donationType.toString().split('.').last,
+      'donationDate': donationDate.toUtc().toIso8601String(),
       'additionalDetails': additionalDetails,
     };
   }
 
-  //fromMap method
+  // fromMap method
   factory Donation.fromMap(Map<String, dynamic> map) {
     return Donation(
       id: map['id'],
       donorId: map['donorId'],
-      donationType: map['donationType'],
-      donationDate: map['donationDate'],
+      donationType: _parseDonationType(map['donationType']),
+      donationDate: DateTime.parse(map['donationDate']).toLocal(),
       additionalDetails: map['additionalDetails'],
+    );
+  }
+
+  static DonationType _parseDonationType(String value) {
+    return DonationType.values.firstWhere(
+      (type) => type.toString() == 'DonationType.$value',
+      orElse: () => DonationType
+          .Clothes, // Set a default value or handle the case when the value is not found
     );
   }
 }

@@ -33,10 +33,7 @@ class DonationService {
         final donorId = user.uid;
 
         // Add the donation to the collection
-        await donationsCollection.add({
-          ...donation.toMap(),
-          'donorId': donorId,
-        });
+        await donationsCollection.doc(donation.id).set(donation.toMap());
 
         print('Donation added: ${donation.donationType}');
       }

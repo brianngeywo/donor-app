@@ -1,15 +1,14 @@
 import 'package:donor_app/donor_dashboard/constants.dart';
+import 'package:donor_app/services/auth_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/donation_model.dart';
 
 class MyDonationsScreen extends StatelessWidget {
-  final CollectionReference donationsCollection = FirebaseFirestore.instance
-      .collection("users")
-      .doc("lm3jdbzl1Ub7Neq4LuEUeMfy6cY2")
-      .collection('donations');
-
+  final userDonationsCollection = FirebaseFirestore.instance
+      .collection('donations')
+      .where('donorId', isEqualTo: AuthManager().currentUser!.uid);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +16,7 @@ class MyDonationsScreen extends StatelessWidget {
         title: Text('Your Donations'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: donationsCollection.snapshots(),
+        stream: userDonationsCollection.snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<DocumentSnapshot> donationDocs = snapshot.data!.docs;
@@ -35,9 +34,10 @@ class MyDonationsScreen extends StatelessWidget {
                   title: Text(formatDateOnly(DateTime.parse(date))),
                   children: donationsForDate.map((donation) {
                     return ListTile(
-                      title: Text('Donation Type: ${donation.donationType}'),
+                      title: Text(
+                          'Donation Type: ${donation.donationType.toString().split('.').last}'),
                       subtitle: Text(
-                          'Date Requested: ${formatDateAndTime(donation.donationDate)}'),
+                          'Date Confirmed: ${formatDateAndTime(donation.donationDate)}'),
                     );
                   }).toList(),
                 );

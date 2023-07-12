@@ -13,7 +13,7 @@ class PreviousDonationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Previous Donations'),
+        title: const Text('Previous Donations'),
       ),
       body: StreamBuilder<List<Donation>>(
         stream: DonationService().getAllDonationsForAllUsersAsStream(),
@@ -34,9 +34,10 @@ class PreviousDonationsScreen extends StatelessWidget {
                   title: Text(formatDateOnly(DateTime.parse(date))),
                   children: donations.map((donation) {
                     return ListTile(
-                      title: Text('Donation Type: ${donation.donationType}'),
-                      trailing: Text(
-                          'Date Requested: ${formatDateAndTime(donation.donationDate)}'),
+                      title: Text(
+                          'Donation Type: ${donation.donationType.toString().split('.').last}'),
+                      subtitle: Text(
+                          'Date sent: ${formatDateAndTime(donation.donationDate)}'),
                     );
                   }).toList(),
                 );
@@ -45,7 +46,7 @@ class PreviousDonationsScreen extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
