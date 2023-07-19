@@ -1,9 +1,8 @@
 import 'dart:math';
 
-import 'organization_donation_model.dart';
 import 'package:flutter/material.dart';
 
-import 'dashboard_sidebar.dart';
+import '../../models/organization_donation_model.dart';
 import '../main_app_bar.dart';
 
 class OrganizationDonationDetailsScreen extends StatefulWidget {

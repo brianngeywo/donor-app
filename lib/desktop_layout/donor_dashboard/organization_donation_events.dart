@@ -1,10 +1,9 @@
 import 'dart:math';
 
-import 'organization_donation_details_screen.dart';
-import 'package:donor_app/test_datas.dart';
 import 'package:flutter/material.dart';
 
-import 'organization_donation_model.dart';
+import '../../models/organization_donation_model.dart';
+import '../../test_datas.dart';
 
 class OrganizationDonationEventsScreen extends StatefulWidget {
   Function(String) onItemSelected;

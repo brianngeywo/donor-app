@@ -7,12 +7,12 @@ import '../../models/user_model.dart';
 import '../../models/user_service.dart';
 import '../../services/auth_manager.dart';
 
-class DonorProfileScreen extends StatefulWidget {
+class MobileDonorProfileScreen extends StatefulWidget {
   @override
-  State<DonorProfileScreen> createState() => _DonorProfileScreenState();
+  State<MobileDonorProfileScreen> createState() => _MobileDonorProfileScreenState();
 }
 
-class _DonorProfileScreenState extends State<DonorProfileScreen> {
+class _MobileDonorProfileScreenState extends State<MobileDonorProfileScreen> {
   Future<UserModel>? _userFuture;
 
   @override
@@ -45,33 +45,44 @@ class _DonorProfileScreenState extends State<DonorProfileScreen> {
             } else if (snapshot.hasData) {
               // User data is available, display it
               UserModel user = snapshot.data!;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CircleAvatar(
-                    radius: 50.0,
-                    // Add donor's profile picture here
-                    // You can use NetworkImage or AssetImage as per your implementation
-                    backgroundImage: NetworkImage(
-                        'https://images.pexels.com/photos/3460478/pexels-photo-3460478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Text(
-                    user.name,
-                    style: const TextStyle(
-                        fontSize: 24.0, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(user.email),
-                  const SizedBox(height: 16.0),
-                  const Text(
-                    'Donation History',
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 8.0),
-                  Expanded(
-                    child: StreamBuilder<List<Donation>>(
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: CircleAvatar(
+                        radius: 50.0,
+                        // Add donor's profile picture here
+                        // You can use NetworkImage or AssetImage as per your implementation
+                        backgroundImage: NetworkImage(
+                          'https://images.pexels.com/photos/3460478/pexels-photo-3460478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      user.name,
+                      style: const TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8.0),
+                    Text(
+                      user.email,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16.0),
+                    const Text(
+                      'Donation History',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8.0),
+                    StreamBuilder<List<Donation>>(
                       stream: DonationService()
                           .getAllDonationsForSpecificUserAsStream(user.id),
                       builder: (context, snapshot) {
@@ -89,9 +100,10 @@ class _DonorProfileScreenState extends State<DonorProfileScreen> {
                           // Donation history data is available, display it
                           var donations = snapshot.data!;
                           return ListView.separated(
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const Divider(),
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(),
                             itemCount: donations.length,
                             // Replace with actual donation history data
                             itemBuilder: (BuildContext context, int index) {
@@ -99,17 +111,18 @@ class _DonorProfileScreenState extends State<DonorProfileScreen> {
                               var donation = donations[index];
 
                               return ListTile(
-                                leading: Text(donation.donationType.name),
+                                title: Text(donation.donationType.name),
                                 subtitle: Text(
-                                    'Date: ${formatDateAndTime(donation.donationDate)}'),
+                                  'Date: ${formatDateAndTime(donation.donationDate)}',
+                                ),
                               );
                             },
                           );
                         }
                       },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             } else {
               // No user data found

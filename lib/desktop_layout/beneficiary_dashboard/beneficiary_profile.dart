@@ -5,7 +5,7 @@ import '../../models/donation_request_model.dart';
 import '../../models/user_model.dart';
 import '../../models/user_service.dart';
 import '../../services/auth_manager.dart';
-import '../donor_dashboard/constants.dart';
+import '../../constants.dart';
 
 class BeneficiaryProfileScreen extends StatefulWidget {
   @override

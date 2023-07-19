@@ -1,6 +1,6 @@
-import 'desktop_layout/donor_dashboard/organization_donation_model.dart';
 import 'models/donation_model.dart';
 import 'models/donation_request_model.dart';
+import 'models/organization_donation_model.dart';
 
 final List<OrganizationDonation> organizationDonations = [
   OrganizationDonation(

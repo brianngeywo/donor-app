@@ -2,9 +2,9 @@ import 'package:donor_app/desktop_layout/beneficiary_dashboard/pending_donations
 import 'package:donor_app/desktop_layout/beneficiary_dashboard/request_donation.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/organization_donation_model.dart';
 import '../donor_dashboard/organization_donation_details_screen.dart';
 import '../donor_dashboard/organization_donation_events.dart';
-import '../donor_dashboard/organization_donation_model.dart';
 import '../main_app_bar.dart';
 import 'approved_donation_requests.dart';
 import 'beneficiary_dashboard_sidebar.dart';

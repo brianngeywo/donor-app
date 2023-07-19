@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/donation_request_model.dart';
 import '../../services/donation_requests_service.dart';
-import '../donor_dashboard/constants.dart';
+import '../../constants.dart';
 
 class ApprovedDonationsPage extends StatelessWidget {
   const ApprovedDonationsPage({super.key});

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'desktop_layout/desktop_role_selection_screen.dart';
 import 'firebase_options.dart';
+import 'mobile_layout/mobile_role_selection_screen.dart';
 
 void main() async {
   // Initialize Firebase
@@ -71,11 +72,8 @@ class MobileHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Build your mobile layout
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Mobile Home'),
-      ),
       body: Center(
-        child: Text('Mobile Content'),
+        child: MobileRoleSelectionPage(),
       ),
     );
   }

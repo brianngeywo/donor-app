@@ -1,6 +1,7 @@
 import 'package:donor_app/desktop_layout/donor_dashboard/previous_donations_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/organization_donation_model.dart';
 import '../main_app_bar.dart';
 import 'dashboard_sidebar.dart';
 import 'donor_profile_screen.dart';
@@ -8,7 +9,6 @@ import 'make_donation_screen.dart';
 import 'my_donations_screen.dart';
 import 'organization_donation_details_screen.dart';
 import 'organization_donation_events.dart';
-import 'organization_donation_model.dart';
 
 class MainDonorDashboard extends StatefulWidget {
   @override

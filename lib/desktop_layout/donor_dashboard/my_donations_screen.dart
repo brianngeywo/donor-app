@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donor_app/services/auth_manager.dart';
-import 'package:flutter/materialal.dart';
+import 'package:flutter/material.dart';
 
+import '../../constants.dart';
 import '../../models/donation_model.dart';
-import 'constants.dart';
 
 class MyDonationsScreen extends StatelessWidget {
   final userDonationsCollection = FirebaseFirestore.instance

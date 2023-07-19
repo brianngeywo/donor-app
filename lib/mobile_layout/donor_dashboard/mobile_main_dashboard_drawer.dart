@@ -2,25 +2,37 @@ import 'package:flutter/material.dart';
 
 import '../../services/auth_service.dart';
 
-class DonorDashboardSidebar extends StatelessWidget {
+class MobileDonorDashboardDrawer extends StatelessWidget {
   final Function(String) onItemSelected;
 
-  DonorDashboardSidebar({required this.onItemSelected});
+  MobileDonorDashboardDrawer({required this.onItemSelected});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 120.0,
-      color: Theme.of(context).colorScheme.primary,
+    return Drawer(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            child: Text(
+              'Donor Dashboard',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
           ListTile(
             leading: const Icon(Icons.account_circle, color: Colors.white),
             title: const Text('Your Profile',
                 style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Your Profile');
+              Navigator.of(context).pop(); // Close the drawer
             },
           ),
           ListTile(
@@ -29,6 +41,7 @@ class DonorDashboardSidebar extends StatelessWidget {
                 style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Make Donation');
+              Navigator.of(context).pop(); // Close the drawer
             },
           ),
           ListTile(
@@ -37,6 +50,7 @@ class DonorDashboardSidebar extends StatelessWidget {
                 style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('My Donations');
+              Navigator.of(context).pop(); // Close the drawer
             },
           ),
           ListTile(
@@ -45,6 +59,7 @@ class DonorDashboardSidebar extends StatelessWidget {
                 style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Previous Donations');
+              Navigator.of(context).pop(); // Close the drawer
             },
           ),
           ListTile(
@@ -53,6 +68,7 @@ class DonorDashboardSidebar extends StatelessWidget {
                 style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Organization Events');
+              Navigator.of(context).pop(); // Close the drawer
             },
           ),
           ListTile(
@@ -60,9 +76,9 @@ class DonorDashboardSidebar extends StatelessWidget {
             title: const Text('Logout', style: TextStyle(color: Colors.white)),
             onTap: () {
               AuthService().signOut();
+              Navigator.of(context).pop(); // Close the drawer
             },
           ),
-          // Add any other relevant sidebar items here
         ],
       ),
     );
