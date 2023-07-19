@@ -1,16 +1,17 @@
 import 'package:donor_app/models/user_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../desktop_layout/donor_dashboard/login.dart';
 import '../../services/auth_manager.dart';
 import '../../services/auth_service.dart';
-import 'login.dart';
 
-class DonorSignUpScreen extends StatefulWidget {
+class MobileDonorSignUpScreen extends StatefulWidget {
   @override
-  State<DonorSignUpScreen> createState() => _DonorSignUpScreenState();
+  State<MobileDonorSignUpScreen> createState() =>
+      _MobileDonorSignUpScreenState();
 }
 
-class _DonorSignUpScreenState extends State<DonorSignUpScreen> {
+class _MobileDonorSignUpScreenState extends State<MobileDonorSignUpScreen> {
   String email = '';
   String password = '';
   String name = '';

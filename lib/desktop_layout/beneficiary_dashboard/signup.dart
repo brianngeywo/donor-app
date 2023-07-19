@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/user_model.dart';
 import '../../services/auth_manager.dart';
 import '../../services/auth_service.dart';
-import 'beneficiary_loginn.dart';
+import 'beneficiary_login.dart';
 
 class BeneficiarySignUpScreen extends StatefulWidget {
   const BeneficiarySignUpScreen({Key? key});
@@ -27,9 +27,11 @@ class _BeneficiarySignUpScreenState extends State<BeneficiarySignUpScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
                 'Beneficiary App',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 48.0,
                   color: Colors.deepPurple,

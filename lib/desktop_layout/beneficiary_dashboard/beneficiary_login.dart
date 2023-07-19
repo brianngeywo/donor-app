@@ -23,9 +23,11 @@ class _BeneficiaryLoginScreenState extends State<BeneficiaryLoginScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
                 'Beneficiary App',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 48.0,
                   color: Colors.deepPurple,

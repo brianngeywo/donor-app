@@ -2,14 +2,14 @@ import 'package:donor_app/desktop_layout/donor_dashboard/signup.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/auth_service.dart';
-import 'main_donor_dashboard.dart';
+import 'mobile_main_donor_dashboard.dart';
 
-class DonorLoginScreen extends StatefulWidget {
+class MobileDonorLoginScreen extends StatefulWidget {
   @override
-  State<DonorLoginScreen> createState() => _DonorLoginScreenState();
+  State<MobileDonorLoginScreen> createState() => _MobileDonorLoginScreenState();
 }
 
-class _DonorLoginScreenState extends State<DonorLoginScreen> {
+class _MobileDonorLoginScreenState extends State<MobileDonorLoginScreen> {
   String email = '';
 
   String password = '';
@@ -70,7 +70,7 @@ class _DonorLoginScreenState extends State<DonorLoginScreen> {
                     AuthService().signInWithEmailAndPassword(email, password);
                     Future.delayed(const Duration(seconds: 2), () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => MainDonorDashboard()));
+                          builder: (context) => MobileMainDonorDashboard()));
                     });
                   }
                 },
