@@ -1,10 +1,10 @@
-import 'package:donor_app/donor_dashboard/login.dart';
-import 'package:donor_app/donor_dashboard/main_donor_dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../services/auth_manager.dart';
-import '../services/auth_service.dart';
+import '../../services/auth_manager.dart';
+import '../../services/auth_service.dart';
+import 'login.dart';
+import 'main_donor_dashboard.dart';
 
 class DonorHomePage extends StatefulWidget {
   const DonorHomePage({super.key});

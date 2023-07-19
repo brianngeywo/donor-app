@@ -2,8 +2,8 @@ import 'package:donor_app/services/donations_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-import '../models/donation_model.dart';
-import '../services/auth_manager.dart';
+import '../../models/donation_model.dart';
+import '../../services/auth_manager.dart';
 
 class MakeDonationScreen extends StatefulWidget {
   const MakeDonationScreen({super.key});

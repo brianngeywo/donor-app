@@ -1,10 +1,9 @@
-import 'package:donor_app/donor_dashboard/constants.dart';
-import 'package:donor_app/models/donation_model.dart';
 import 'package:donor_app/services/auth_manager.dart';
 import 'package:flutter/material.dart';
 
-import '../models/donation_request_model.dart';
-import '../services/donation_requests_service.dart';
+import '../../models/donation_request_model.dart';
+import '../../services/donation_requests_service.dart';
+import '../donor_dashboard/constants.dart';
 
 class ApprovedDonationsPage extends StatelessWidget {
   const ApprovedDonationsPage({super.key});

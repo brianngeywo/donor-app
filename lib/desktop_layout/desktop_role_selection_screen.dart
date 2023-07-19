@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'beneficiary_dashboard/beneficiary_homepage.dart';
 import 'donor_dashboard/donor_homepage.dart';
 
-class RoleSelectionPage extends StatelessWidget {
+class DesktopRoleSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

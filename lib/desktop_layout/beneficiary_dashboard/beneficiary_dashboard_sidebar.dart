@@ -1,10 +1,11 @@
-import '../services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-class DonorDashboardSidebar extends StatelessWidget {
+import '../../services/auth_service.dart';
+
+class BeneficiaryDashboardSidebar extends StatelessWidget {
   final Function(String) onItemSelected;
 
-  DonorDashboardSidebar({required this.onItemSelected});
+  BeneficiaryDashboardSidebar({required this.onItemSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -23,27 +24,27 @@ class DonorDashboardSidebar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.add, color: Colors.white),
-            title: const Text('Make Donation',
+            leading: const Icon(Icons.send_outlined, color: Colors.white),
+            title: const Text("Request Donation",
                 style: TextStyle(color: Colors.white)),
             onTap: () {
-              onItemSelected('Make Donation');
+              onItemSelected('Request Donation');
             },
           ),
           ListTile(
-            leading: const Icon(Icons.history_outlined, color: Colors.white),
-            title: const Text("My Donations",
+            leading: const Icon(Icons.check_circle, color: Colors.white),
+            title: const Text('Approved Donations',
                 style: TextStyle(color: Colors.white)),
             onTap: () {
-              onItemSelected('My Donations');
+              onItemSelected('Approved Donations');
             },
           ),
           ListTile(
-            leading: const Icon(Icons.history_outlined, color: Colors.white),
-            title: const Text('Previous Donations',
+            leading: const Icon(Icons.pending, color: Colors.white),
+            title: const Text('Pending Donations',
                 style: TextStyle(color: Colors.white)),
             onTap: () {
-              onItemSelected('Previous Donations');
+              onItemSelected('Pending Donations');
             },
           ),
           ListTile(

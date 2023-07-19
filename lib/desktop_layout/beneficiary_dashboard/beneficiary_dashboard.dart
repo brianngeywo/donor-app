@@ -1,34 +1,32 @@
-import 'package:donor_app/donor_dashboard/donor_profile_screen.dart';
-
-import 'default_screen.dart';
-import 'package:donor_app/donor_dashboard/previous_donations_screen.dart';
-import 'make_donation_screen.dart';
-import 'package:donor_app/donor_dashboard/organization_donation_events.dart';
-import 'package:donor_app/test_datas.dart';
+import 'package:donor_app/desktop_layout/beneficiary_dashboard/pending_donations_page.dart';
+import 'package:donor_app/desktop_layout/beneficiary_dashboard/request_donation.dart';
 import 'package:flutter/material.dart';
 
-import 'dashboard_sidebar.dart';
+import '../donor_dashboard/organization_donation_details_screen.dart';
+import '../donor_dashboard/organization_donation_events.dart';
+import '../donor_dashboard/organization_donation_model.dart';
 import '../main_app_bar.dart';
-import 'my_donations_screen.dart';
-import 'organization_donation_details_screen.dart';
-import 'organization_donation_model.dart';
+import 'approved_donation_requests.dart';
+import 'beneficiary_dashboard_sidebar.dart';
+import 'beneficiary_profile.dart';
 
-class MainDonorDashboard extends StatefulWidget {
+class MainBeneficiaryDashboard extends StatefulWidget {
   @override
-  _MainDonorDashboardState createState() => _MainDonorDashboardState();
+  _MainBeneficiaryDashboardState createState() =>
+      _MainBeneficiaryDashboardState();
 }
 
-class _MainDonorDashboardState extends State<MainDonorDashboard> {
+class _MainBeneficiaryDashboardState extends State<MainBeneficiaryDashboard> {
   String selectedPage = 'Your Profile';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(title: 'Donations Dashboard'),
+      appBar: const MainAppBar(title: 'Beneficiary Dashboard'),
       body: Center(
         child: Row(
           children: [
-            DonorDashboardSidebar(
+            BeneficiaryDashboardSidebar(
               onItemSelected: (String item) {
                 setState(() {
                   selectedPage = item;
@@ -59,25 +57,29 @@ class _MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
     switch (widget.selectedPage) {
+      case 'view event':
+        return OrganizationDonationDetailsScreen(
+          organizationDonation: widget.organizationDonation!,
+        );
       case 'Your Profile':
         return Padding(
           padding: const EdgeInsets.all(12.0),
-          child: DonorProfileScreen(),
+          child: BeneficiaryProfileScreen(),
         );
-      case 'Make Donation':
+      case 'Approved Donations':
         return const Padding(
           padding: EdgeInsets.all(12.0),
-          child: MakeDonationScreen(),
+          child: ApprovedDonationsPage(),
         );
-      case 'My Donations':
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: MyDonationsScreen(),
+      case 'Pending Donations':
+        return const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: PendingDonationsPage(),
         );
-      case 'Previous Donations':
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: PreviousDonationsScreen(),
+      case 'Request Donation':
+        return const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: DonationRequestPage(),
         );
       case 'Organization Events':
         return Padding(
@@ -95,10 +97,7 @@ class _MainContentState extends State<MainContent> {
             },
           ),
         );
-      case 'view event':
-        return OrganizationDonationDetailsScreen(
-          organizationDonation: widget.organizationDonation!,
-        );
+
       default:
         return Container();
     }

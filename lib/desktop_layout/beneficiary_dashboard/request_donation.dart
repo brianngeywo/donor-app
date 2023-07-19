@@ -3,8 +3,8 @@ import 'package:donor_app/services/donation_requests_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-import '../models/donation_model.dart';
-import '../models/donation_request_model.dart';
+import '../../models/donation_model.dart';
+import '../../models/donation_request_model.dart';
 
 class DonationRequestPage extends StatefulWidget {
   const DonationRequestPage({super.key});

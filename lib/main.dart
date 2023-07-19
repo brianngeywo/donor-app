@@ -1,7 +1,7 @@
-import 'package:donor_app/role_selection_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'desktop_layout/desktop_role_selection_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -24,7 +24,59 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: RoleSelectionPage(),
+      home: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth >= 1200) {
+            // Desktop layout
+            return DesktopHomePage();
+          } else if (constraints.maxWidth >= 480) {
+            // Tablet layout
+            return TabletHomePage();
+          } else {
+            // Mobile layout
+            return MobileHomePage();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class DesktopHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Build your desktop layout
+    return Scaffold(
+      body: Center(
+        child: DesktopRoleSelectionPage(),
+      ),
+    );
+  }
+}
+
+class TabletHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Build your tablet layout
+    return Scaffold(
+      body: Center(
+        child: DesktopRoleSelectionPage(),
+      ),
+    );
+  }
+}
+
+class MobileHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Build your mobile layout
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Mobile Home'),
+      ),
+      body: Center(
+        child: Text('Mobile Content'),
+      ),
     );
   }
 }

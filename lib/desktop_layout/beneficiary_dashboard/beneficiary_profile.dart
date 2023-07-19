@@ -1,13 +1,11 @@
-import 'package:donor_app/donor_dashboard/constants.dart';
 import 'package:donor_app/services/donation_requests_service.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
-import '../models/donation_model.dart';
-import '../models/donation_request_model.dart';
-import '../models/user_model.dart';
-import '../models/user_service.dart';
-import '../services/auth_manager.dart';
+import '../../models/donation_request_model.dart';
+import '../../models/user_model.dart';
+import '../../models/user_service.dart';
+import '../../services/auth_manager.dart';
+import '../donor_dashboard/constants.dart';
 
 class BeneficiaryProfileScreen extends StatefulWidget {
   @override
@@ -94,8 +92,8 @@ class _BeneficiaryProfileScreenState extends State<BeneficiaryProfileScreen> {
                               separatorBuilder:
                                   (BuildContext context, int index) =>
                                       const Divider(),
-                              itemCount: donationRequests
-                                  .length, // Replace with actual donation history data
+                              itemCount: donationRequests.length,
+                              // Replace with actual donation history data
                               itemBuilder: (BuildContext context, int index) {
                                 // Replace with actual donation data
                                 var donationRequest = donationRequests[index];

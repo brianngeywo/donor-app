@@ -1,9 +1,9 @@
-import 'package:donor_app/donor_dashboard/constants.dart';
-import '../models/user_model.dart';
-import '../services/auth_manager.dart';
-import '../services/auth_service.dart';
-import 'beneficiary_login.dart';
 import 'package:flutter/material.dart';
+
+import '../../models/user_model.dart';
+import '../../services/auth_manager.dart';
+import '../../services/auth_service.dart';
+import 'beneficiary_loginn.dart';
 
 class BeneficiarySignUpScreen extends StatefulWidget {
   const BeneficiarySignUpScreen({Key? key});

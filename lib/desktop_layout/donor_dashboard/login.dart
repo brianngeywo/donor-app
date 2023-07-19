@@ -1,15 +1,15 @@
-import 'package:donor_app/beneficiary_dashboard/beneficiary_dashboard.dart';
-import 'package:donor_app/beneficiary_dashboard/signup.dart';
+import 'package:donor_app/desktop_layout/donor_dashboard/signup.dart';
 import 'package:flutter/material.dart';
 
-import '../services/auth_service.dart';
+import '../../services/auth_service.dart';
+import 'main_donor_dashboard.dart';
 
-class BeneficiaryLoginScreen extends StatefulWidget {
+class DonorLoginScreen extends StatefulWidget {
   @override
-  State<BeneficiaryLoginScreen> createState() => _BeneficiaryLoginScreenState();
+  State<DonorLoginScreen> createState() => _DonorLoginScreenState();
 }
 
-class _BeneficiaryLoginScreenState extends State<BeneficiaryLoginScreen> {
+class _DonorLoginScreenState extends State<DonorLoginScreen> {
   String email = '';
 
   String password = '';
@@ -25,7 +25,7 @@ class _BeneficiaryLoginScreenState extends State<BeneficiaryLoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Beneficiary App',
+                'Donor App',
                 style: TextStyle(
                   fontSize: 48.0,
                   color: Colors.deepPurple,
@@ -68,7 +68,7 @@ class _BeneficiaryLoginScreenState extends State<BeneficiaryLoginScreen> {
                     AuthService().signInWithEmailAndPassword(email, password);
                     Future.delayed(const Duration(seconds: 2), () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => MainBeneficiaryDashboard()));
+                          builder: (context) => MainDonorDashboard()));
                     });
                   }
                 },
@@ -91,7 +91,7 @@ class _BeneficiaryLoginScreenState extends State<BeneficiaryLoginScreen> {
                 ),
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => BeneficiarySignUpScreen()));
+                      builder: (context) => DonorSignUpScreen()));
                 },
                 child: const Text(
                   'REGISTER',

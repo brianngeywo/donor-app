@@ -1,12 +1,11 @@
-import 'package:donor_app/donor_dashboard/constants.dart';
 import 'package:donor_app/services/donations_service.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
-import '../models/donation_model.dart';
-import '../models/user_model.dart';
-import '../models/user_service.dart';
-import '../services/auth_manager.dart';
+import '../../models/donation_model.dart';
+import '../../models/user_model.dart';
+import '../../models/user_service.dart';
+import '../../services/auth_manager.dart';
+import 'constants.dart';
 
 class DonorProfileScreen extends StatefulWidget {
   @override

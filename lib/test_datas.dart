@@ -1,4 +1,4 @@
-import 'donor_dashboard/organization_donation_model.dart';
+import 'desktop_layout/donor_dashboard/organization_donation_model.dart';
 import 'models/donation_model.dart';
 import 'models/donation_request_model.dart';
 
