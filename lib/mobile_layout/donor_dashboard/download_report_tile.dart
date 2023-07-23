@@ -28,7 +28,7 @@ class DownloadReportTile extends StatelessWidget {
                   color: Colors.white70,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.cyan[900],
+                      backgroundColor: Colors.deepPurple,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -50,7 +50,7 @@ class DownloadReportTile extends StatelessWidget {
                   color: Colors.white70,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.cyan[900],
+                      backgroundColor: Colors.deepPurple,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),

@@ -23,7 +23,7 @@ class AdminDashboardSidebar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.add, color: Colors.white),
+            leading: const Icon(Icons.history_outlined, color: Colors.white),
             title: const Text('Donations', style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Donors');
