@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'beneficiary_dashboard/beneficiary_homepage.dart';
 import 'donor_dashboard/donor_homepage.dart';
+import 'main_dashboard/admin_homepage.dart';
 
 class DesktopRoleSelectionPage extends StatelessWidget {
   @override
@@ -43,8 +44,7 @@ class DesktopRoleSelectionPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: Colors.white,
                 onPrimary: Colors.deepPurple,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -70,14 +70,39 @@ class DesktopRoleSelectionPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: Colors.white,
                 onPrimary: Colors.deepPurple,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
               child: const Text(
                 'Donor',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                // Perform action for selecting Donor role
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const AdminHomePage(),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                onPrimary: Colors.deepPurple,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text(
+                'Admin',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
