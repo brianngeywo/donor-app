@@ -10,47 +10,44 @@ class DonorDashboardSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 120.0,
+      width: 250.0,
       color: Theme.of(context).colorScheme.primary,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           ListTile(
             leading: const Icon(Icons.account_circle, color: Colors.white),
-            title: const Text('Your Profile',
-                style: TextStyle(color: Colors.white)),
+            title: const Text('Your Profile', style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Your Profile');
             },
           ),
           ListTile(
             leading: const Icon(Icons.add, color: Colors.white),
-            title: const Text('Make Donation',
-                style: TextStyle(color: Colors.white)),
+            title: const Text('Make Donation', style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Make Donation');
             },
           ),
           ListTile(
             leading: const Icon(Icons.history_outlined, color: Colors.white),
-            title: const Text("My Donations",
-                style: TextStyle(color: Colors.white)),
+            title: const Text("My Donations", style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('My Donations');
             },
           ),
           ListTile(
             leading: const Icon(Icons.history_outlined, color: Colors.white),
-            title: const Text('Previous Donations',
-                style: TextStyle(color: Colors.white)),
+            title:
+                const Text('Previous Donations', style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Previous Donations');
             },
           ),
           ListTile(
             leading: const Icon(Icons.event, color: Colors.white),
-            title: const Text('Organization Events',
-                style: TextStyle(color: Colors.white)),
+            title:
+                const Text('Organization Events', style: TextStyle(color: Colors.white)),
             onTap: () {
               onItemSelected('Organization Events');
             },

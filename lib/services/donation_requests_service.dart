@@ -42,8 +42,7 @@ class DonationRequestService {
   }
 
   // Fetch all accepted donation requests for a specific user
-  Stream<List<DonationRequest>> getAcceptedDonationRequestsForUser(
-      String userId) {
+  Stream<List<DonationRequest>> getAcceptedDonationRequestsForUser(String userId) {
     return donationRequestsCollection
         .where('requesterId', isEqualTo: userId)
         .where('isAccepted', isEqualTo: true)
@@ -68,8 +67,7 @@ class DonationRequestService {
   }
 
   // Fetch all unaccepted donation requests for a specific user
-  Stream<List<DonationRequest>> getUnacceptedDonationRequestsForUser(
-      String userId) {
+  Stream<List<DonationRequest>> getUnacceptedDonationRequestsForUser(String userId) {
     return donationRequestsCollection
         .where('requesterId', isEqualTo: userId)
         .where('isAccepted', isEqualTo: false)
@@ -90,6 +88,18 @@ class DonationRequestService {
       return snapshot.docs.map((doc) {
         return DonationRequest.fromMap(doc.data() as Map<String, dynamic>);
       }).toList();
+    });
+  }
+
+// change isAccepted field to true
+  void acceptDonationRequest(String userId) {
+    donationRequestsCollection
+        .where('requesterId', isEqualTo: userId)
+        .get()
+        .then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        ds.reference.update({'isAccepted': true});
+      }
     });
   }
 }
